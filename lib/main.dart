@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:grid_view_practrice/view/getx/get_homepage.dart';
+import 'package:grid_view_practrice/view/local%20stroge/home_screen.dart';
 
 
 void main() {
@@ -23,7 +25,7 @@ class _MyAppState extends State<MyApp> {
   @override
 
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.light
