@@ -21,7 +21,7 @@ class CounterController extends GetxController {
 
   Future getNote() async {
     try {
-      isLoading.value = true;
+      // isLoading.value = true;
       var status = await NoteGetData().faceNoteData();
 
       if (status != null) {
@@ -33,14 +33,14 @@ class CounterController extends GetxController {
     } catch (e) {
       log("Error$e");
     } finally {
-      isLoading.value =false;
+      // isLoading.value =false;
     }
   }
 
   @override
   void onInit() {
     getNote();
-    log("${notes}");
+    // log("${notes}");
     super.onInit();
   }
 }

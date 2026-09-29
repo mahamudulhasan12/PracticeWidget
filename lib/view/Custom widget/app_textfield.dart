@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-
 class AppTextField extends StatelessWidget {
   const AppTextField({
     super.key,
@@ -19,6 +17,8 @@ class AppTextField extends StatelessWidget {
     this.filled,
     this.hindText,
     this.hTStyle,
+    this.outlineBorder,
+    this.focuseBorder, this.maxline, this.textInputAction,
   });
 
   final TextEditingController controller;
@@ -35,16 +35,24 @@ class AppTextField extends StatelessWidget {
   final Color? fillColor;
   final bool? filled;
   final TextStyle? hTStyle;
+  final InputBorder? outlineBorder;
+  final InputBorder? focuseBorder;
+  final int ? maxline;
+  final TextInputAction ? textInputAction;
   @override
   Widget build(BuildContext context) {
     return TextField(
+      maxLines: maxline ,
       // obscureText: obscureText ?? true,
       onTap: onTab,
       controller: controller,
       keyboardType: inputType,
+      textInputAction: textInputAction,
       // autofocus: true,
       decoration: InputDecoration(
+
         hintText: hindText,
+
         isDense: isDense,
         label: lText,
         hintStyle: hTStyle,
@@ -52,14 +60,21 @@ class AppTextField extends StatelessWidget {
         prefixIcon: pIcons,
         fillColor: fillColor,
         filled: filled,
-        border: OutlineInputBorder(
-          borderRadius: borderRadius ?? BorderRadius.circular(10),
-          borderSide: borderSide ?? BorderSide(width: 0.5, color: Colors.black),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: borderRadius ?? BorderRadius.circular(10),
-          borderSide: borderSide ?? BorderSide(width: 0.5, color: Colors.black),
-        ),
+
+        border:
+            outlineBorder ??
+            OutlineInputBorder(
+              borderRadius: borderRadius ?? BorderRadius.circular(10),
+              borderSide:
+                  borderSide ?? BorderSide(width: 0.5, color: Colors.black),
+            ),
+        focusedBorder:
+            focuseBorder ??
+            OutlineInputBorder(
+              borderRadius: borderRadius ?? BorderRadius.circular(10),
+              borderSide:
+                  borderSide ?? BorderSide(width: 0.5, color: Colors.black),
+            ),
       ),
     );
   }

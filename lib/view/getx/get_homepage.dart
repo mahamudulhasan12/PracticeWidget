@@ -5,6 +5,7 @@ import 'package:grid_view_practrice/view/Custom%20widget/app_button.dart';
 import 'package:grid_view_practrice/view/Custom%20widget/app_text.dart';
 
 import 'package:get/get.dart';
+import 'package:grid_view_practrice/view/getx/add_or_update_note_screen.dart';
 import 'package:grid_view_practrice/view/getx/controller.dart';
 
 class GetHomepage extends StatefulWidget {
@@ -84,39 +85,37 @@ class _GetHomepageState extends State<GetHomepage> {
               ),
               SizedBox(height: 20),
 
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Obx(() {
-                    // if (c.isLoading.value) {
-                    //   log("====${c.notes}======");
-                    //   return Center(child: CircularProgressIndicator());
-                    // }
-                    if (c.notes.isEmpty) {
-                      return Center(child: AppText(text: "Note Note Found"));
-                    }
-                    return ListView.builder(
+              Obx(
+                () => Card(
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
                       itemCount: c.notes.length,
                       itemBuilder: (context, index) {
                         var note = c.notes[index];
-                        return Padding(
-                          padding: EdgeInsets.all(10),
+                        log("$note");
+                        return Card(
                           child: ListTile(
-                            title: AppText(
-                              text: "${note["title"] ?? ""}",
-                              fontWeight: FontWeight.bold,
-                            ),
-                            subtitle: AppText(text: "${note['details'] ?? ""}"),
+                            title: AppText(text: "${note['title'] ?? ""}"),
+                            subtitle: AppText(text: "${note['details']}"),
                           ),
                         );
                       },
-                    );
-                  }),
+                    ),
+                  ),
                 ),
               ),
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>AddOrUpdateNoteScreen()));
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
