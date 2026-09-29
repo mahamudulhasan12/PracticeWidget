@@ -19,9 +19,14 @@ class _GetHomepageState extends State<GetHomepage> {
   @override
   Widget build(BuildContext context) {
     log("=========${c.counter}=====");
-    return  Scaffold(
+    // log("${c.notes}");
+    return Scaffold(
       appBar: AppBar(
-        title: AppText(text: "State Management",fontSize: 16,fontWeight: FontWeight.bold,),
+        title: AppText(
+          text: "State Management",
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -30,52 +35,85 @@ class _GetHomepageState extends State<GetHomepage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Center(child: AppText(text: "Counter App",fontWeight: FontWeight.bold,)),
-              SizedBox(height: 20,),
-              Obx(()=>AppText(text: "${c.counter}",fontWeight: FontWeight.bold,fontSize: 20,),),
-              SizedBox(height: 10,),
-              AppText(text: "Increment or Decrement Number",fontSize: 12,fontWeight: FontWeight.bold,),
-              SizedBox(height: 20,),
+              Center(
+                child: AppText(
+                  text: "Counter App",
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 20),
+              Obx(
+                () => AppText(
+                  text: "${c.counter}",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+              SizedBox(height: 10),
+              AppText(
+                text: "Increment or Decrement Number",
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+              ),
+              SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 spacing: 20,
                 children: [
-                  SizedBox(width:50,height:30,child: AppButon(onPressed: (){
-                    c.increment();
-
-                  }, text: "+",)),
-                  SizedBox(width:50,height:30,child: AppButon(onPressed: (){
-                    c.decrement();
-
-                  }, text: "-",)),
+                  SizedBox(
+                    width: 50,
+                    height: 30,
+                    child: AppButon(
+                      onPressed: () {
+                        c.increment();
+                      },
+                      text: "+",
+                    ),
+                  ),
+                  SizedBox(
+                    width: 50,
+                    height: 30,
+                    child: AppButon(
+                      onPressed: () {
+                        c.decrement();
+                      },
+                      text: "-",
+                    ),
+                  ),
                 ],
               ),
-              SizedBox(height: 20,),
+              SizedBox(height: 20),
 
               Card(
-                child:Padding(
+                child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: c.notes.length,
-                    itemBuilder: (context,index){
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisAlignment:MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            AppText(text: "${c.notes[index]['title'] ?? ""}",fontWeight: FontWeight.bold,fontSize: 16,),
-                            AppText(text: "${c.notes[index]['details'] ?? ""}")
-                          ],
-                        ),
-                      );
-                    },
-                  ),
+                  child: Obx(() {
+                    // if (c.isLoading.value) {
+                    //   log("====${c.notes}======");
+                    //   return Center(child: CircularProgressIndicator());
+                    // }
+                    if (c.notes.isEmpty) {
+                      return Center(child: AppText(text: "Note Note Found"));
+                    }
+                    return ListView.builder(
+                      itemCount: c.notes.length,
+                      itemBuilder: (context, index) {
+                        var note = c.notes[index];
+                        return Padding(
+                          padding: EdgeInsets.all(10),
+                          child: ListTile(
+                            title: AppText(
+                              text: "${note["title"] ?? ""}",
+                              fontWeight: FontWeight.bold,
+                            ),
+                            subtitle: AppText(text: "${note['details'] ?? ""}"),
+                          ),
+                        );
+                      },
+                    );
+                  }),
                 ),
               ),
-
             ],
           ),
         ),
@@ -83,4 +121,3 @@ class _GetHomepageState extends State<GetHomepage> {
     );
   }
 }
-
