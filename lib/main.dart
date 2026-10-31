@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grid_view_practrice/responsive%20desing/first_screen.dart';
 import 'package:grid_view_practrice/view/getx/get_homepage.dart';
 import 'package:grid_view_practrice/view/local%20stroge/home_screen.dart';
 
@@ -34,7 +35,7 @@ class _MyAppState extends State<MyApp> {
         brightness: Brightness.dark
       ),
       // themeMode:_themeMode,
-      home: GetHomepage(),
+      home: FirstScreen(),
     );
   }
 }
